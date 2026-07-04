@@ -2,6 +2,8 @@ import ButtonLogin from "@/components/ButtonLogin";
 
 export default function Home() {
   const isLoggedIn = true;
+  const age = 19;
+  const canVote = age >= 18 ? "Can vote" : "Cannot vote";
   const name = "Chris";
   return (
     <main>
@@ -105,7 +107,11 @@ export default function Home() {
                 </svg>
                 24/7 Support{" "}
               </li>
-              <ButtonLogin isLoggedIn={isLoggedIn} name={name}></ButtonLogin>
+              <ButtonLogin
+                isLoggedIn={isLoggedIn}
+                name={name}
+                extraStyle="w-full"
+              ></ButtonLogin>
             </ul>
           </div>
         </div>
