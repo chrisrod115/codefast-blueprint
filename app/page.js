@@ -3,12 +3,6 @@ import ListItems from "@/components/ListItems";
 
 export default function Home() {
   const isLoggedIn = true;
-  const pricing_features_list = [
-    "Collect customer feedback",
-    "Unlimited boards",
-    "Admin dashboard",
-    "24/7 support",
-  ];
   const name = "Chris";
   return (
     <main>
@@ -63,6 +57,43 @@ export default function Home() {
               ></ButtonLogin>
             </ul>
           </div>
+        </div>
+      </section>
+      {/* FAQ Section */}
+      <section className="bg-base-200">
+        <div className="py-32 px-8 max-w-3xl mx-auto">
+          <p className="text-sm uppercase font-medium text-center text-primary">
+            FAQ
+          </p>
+          <h2 className="text-3xl lg:text-5xl font-extrabold mb-12 text-center">
+            Frequently Asked Questions
+          </h2>
+          <ul>
+            {[
+              {
+                question: "What do I get exactly?",
+                answer:
+                  "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+              },
+              {
+                question: "Can I cancel at any time?",
+                answer:
+                  "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+              },
+              {
+                question: "What payment methods do you accept?",
+                answer:
+                  "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+              },
+              {
+                question: "Do you offer discounts for non-profits?",
+                answer:
+                  "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+              },
+            ].map((qa) => (
+              <li key={qa.question}>{qa.question}</li>
+            ))}
+          </ul>
         </div>
       </section>
     </main>
