@@ -1,5 +1,6 @@
 import ButtonLogin from "@/components/ButtonLogin";
 import ListItems from "@/components/ListItems";
+import FAQListItem from "@/components/FAQListItem";
 
 export default function Home() {
   const isLoggedIn = true;
@@ -91,7 +92,7 @@ export default function Home() {
                   "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
               },
             ].map((qa) => (
-              <li key={qa.question}>{qa.question}</li>
+              <FAQListItem key={qa.question} qa={qa} />
             ))}
           </ul>
         </div>
