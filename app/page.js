@@ -3,10 +3,13 @@ import ListItems from "@/components/ListItems";
 import FAQListItem from "@/components/FAQListItem";
 import Image from "next/image";
 import productDemo from "@/app/productDemo.jpeg";
+import { auth } from "@/auth";
 
-export default function Home() {
+export default async function Home() {
   const isLoggedIn = true;
   const name = "Chris";
+  const session = await auth();
+  console.log(session);
   return (
     <main>
       {/* Header Section */}
@@ -22,7 +25,7 @@ export default function Home() {
             </a>
           </div>
           <div>
-            <ButtonLogin isLoggedIn={isLoggedIn} name={name}></ButtonLogin>
+            <ButtonLogin session={session}></ButtonLogin>
           </div>
         </div>
       </section>
@@ -38,7 +41,7 @@ export default function Home() {
             Create a feedback board in minutes, prioritize features and build
             products your customers will love!
           </div>
-          <ButtonLogin isLoggedIn={isLoggedIn} name={name}></ButtonLogin>
+          <ButtonLogin session={session}></ButtonLogin>
         </div>
       </section>
       {/* Pricing Section */}
@@ -62,8 +65,7 @@ export default function Home() {
               <ListItems>Admin dashboard</ListItems>
               <ListItems>24/7 support</ListItems>
               <ButtonLogin
-                isLoggedIn={isLoggedIn}
-                name={name}
+                session={session}
                 extraStyle="w-full"
               ></ButtonLogin>
             </ul>
