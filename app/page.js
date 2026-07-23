@@ -6,8 +6,6 @@ import productDemo from "@/app/productDemo.jpeg";
 import { auth } from "@/auth";
 
 export default async function Home() {
-  const isLoggedIn = true;
-  const name = "Chris";
   const session = await auth();
   console.log(session);
   return (
@@ -64,10 +62,7 @@ export default async function Home() {
               <ListItems>Unlimited boards</ListItems>
               <ListItems>Admin dashboard</ListItems>
               <ListItems>24/7 support</ListItems>
-              <ButtonLogin
-                session={session}
-                extraStyle="w-full"
-              ></ButtonLogin>
+              <ButtonLogin session={session} extraStyle="w-full"></ButtonLogin>
             </ul>
           </div>
         </div>
