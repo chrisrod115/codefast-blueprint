@@ -7,8 +7,9 @@ const FormNewBoard = () => {
           <span className="label-text">Board name</span>
         </div>
         <input
+          required
           type="text"
-          placeholder="Type here"
+          placeholder="Future input unicorn 🦄"
           className="input input-bordered w-full"
         />
       </label>
