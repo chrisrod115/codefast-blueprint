@@ -24,7 +24,7 @@ export async function POST(req) {
       );
     }
 
-    await connectMongo;
+    await connectMongo();
 
     const user = await User.findById(session.user.id);
 
@@ -33,7 +33,7 @@ export async function POST(req) {
       name: body.name,
     });
 
-    user.boards.push(board._id);
+    user.board.push(board._id);
     await user.save();
 
     return NextResponse.json({});
