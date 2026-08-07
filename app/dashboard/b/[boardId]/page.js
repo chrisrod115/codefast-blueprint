@@ -3,7 +3,8 @@ import Board from "@/models/Board";
 import { auth } from "@/auth";
 import { redirect } from "next/navigation";
 import Link from "next/link";
-
+import CardBoardLink from "@/components/CardBoardLink";
+import ButtonDeleteBoard from "@/components/ButtonDeleteBoard";
 const getBoard = async (boardId) => {
   const session = await auth();
   await connectMongo();
@@ -44,6 +45,8 @@ export default async function FeedbackBoard({ params }) {
 
       <section className="max-w-5xl mx-auto px-5 py-12 space-y-12">
         <h1 className="font-extrabold text-xl mb-4">{board.name}</h1>
+        <CardBoardLink boardId={board._id.toString()} />
+        <ButtonDeleteBoard boardId={board._id.toString()} />
       </section>
     </main>
   );
