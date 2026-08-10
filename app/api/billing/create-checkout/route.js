@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { auth } from "@auth";
+import { auth } from "@/auth";
 import connectMongo from "@/libs/mongoose";
 import User from "@/models/User";
 import Stripe from "stripe";
@@ -18,7 +18,7 @@ export async function POST(req) {
     await connectMongo();
     const user = await User.findById(session.user.id);
     const stripe = new Stripe(process.env.STRIPE_API_KEY);
-    const stripCheckoutSession = stripe.checkout.sessions.create({
+    const stripeCheckoutSession = await stripe.checkout.sessions.create({
       mode: "subscription",
       line_items: [
         {
@@ -31,7 +31,7 @@ export async function POST(req) {
       customer_email: user.email,
       client_reference_id: user.id.toString(),
     });
-    return NextResponse.json({ url: stripCheckoutSession.url });
+    return NextResponse.json({ url: stripeCheckoutSession.url });
   } catch (e) {
     return NextResponse.json({ error: e.message }, { status: 500 });
   }
