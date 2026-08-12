@@ -7,7 +7,6 @@ import { auth } from "@/auth";
 
 export default async function Home() {
   const session = await auth();
-  console.log(session);
   return (
     <main>
       {/* Header Section */}
@@ -54,16 +53,17 @@ export default async function Home() {
           <div className="p-8 bg-base-100 max-w-96 rounded-3xl mx-auto space-y-6">
             <div className="flex gap-1 items-baseline">
               <div className="text-4xl font-black">$19</div>
-              <div className="upperclass text-sm font-medium opacity-60"></div>
-              /month
+              <div className="uppercase text-sm font-medium opacity-60">
+                /month
+              </div>
             </div>
             <ul className="space-y-2">
               <ListItems>Collect customer feedback</ListItems>
               <ListItems>Unlimited boards</ListItems>
               <ListItems>Admin dashboard</ListItems>
               <ListItems>24/7 support</ListItems>
-              <ButtonLogin session={session} extraStyle="w-full"></ButtonLogin>
             </ul>
+            <ButtonLogin session={session} extraStyle="w-full"></ButtonLogin>
           </div>
         </div>
       </section>

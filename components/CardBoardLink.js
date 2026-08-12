@@ -1,14 +1,14 @@
 "use client";
 import toast from "react-hot-toast";
 const CardBoardLink = ({ boardId }) => {
-  const boardLink = `${process.env.NODE_ENV === "development" ? "http://localhost:3000" : "https://codefast-blueprint.vercel.app/"}/b/${boardId}`;
+  const boardLink = `${process.env.NODE_ENV === "development" ? "http://localhost:3000" : "https://codefast-blueprint.vercel.app"}/b/${boardId}`;
 
   const copyLink = () => {
     navigator.clipboard.writeText(boardLink);
     toast.success("Link copied to clipboard!");
   };
   return (
-    <div className="bg-base-100 p-4 rounded-2xl text-sm px-4 py-2.5 flex items-centershadow-md max-w-96">
+    <div className="bg-base-100 p-4 rounded-2xl text-sm px-4 py-2.5 flex items-center gap-2 shadow-md max-w-96">
       <p className="truncate">{boardLink}</p>
       <button className="btn btn-sm btn-neutral btn-square" onClick={copyLink}>
         <svg

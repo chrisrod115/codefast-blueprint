@@ -72,6 +72,8 @@ export async function DELETE(req) {
       );
     }
 
+    await connectMongo();
+
     const user = await User.findById(session.user.id);
 
     if (!user.hasAccess) {

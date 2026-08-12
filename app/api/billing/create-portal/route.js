@@ -8,12 +8,13 @@ export async function POST(req) {
   try {
     const body = await req.json();
 
-    if (!body.successUrl || !body.cancelUrl) {
+    if (!body.returnUrl) {
       return NextResponse.json(
-        { error: "Missing required URLs" },
+        { error: "Missing required URL" },
         { status: 400 },
       );
     }
+
     const session = await auth();
     if (!session) {
       return NextResponse.json(
@@ -28,21 +29,20 @@ export async function POST(req) {
       return NextResponse.json({ error: "User not found" }, { status: 404 });
     }
 
+    if (!user.customerId) {
+      return NextResponse.json(
+        { error: "No billing account found. Please subscribe first." },
+        { status: 400 },
+      );
+    }
+
     const stripe = new Stripe(process.env.STRIPE_API_KEY);
-    const stripeCheckoutSession = await stripe.checkout.sessions.create({
-      mode: "subscription",
-      line_items: [
-        {
-          price: process.env.STRIPE_PRICE_ID,
-          quantity: 1,
-        },
-      ],
-      success_url: body.successUrl,
-      cancel_url: body.cancelUrl,
-      customer_email: user.email,
-      client_reference_id: user.id.toString(),
+    const portalSession = await stripe.billingPortal.sessions.create({
+      customer: user.customerId,
+      return_url: body.returnUrl,
     });
-    return NextResponse.json({ url: stripeCheckoutSession.url });
+
+    return NextResponse.json({ url: portalSession.url });
   } catch (e) {
     return NextResponse.json({ error: e.message }, { status: 500 });
   }

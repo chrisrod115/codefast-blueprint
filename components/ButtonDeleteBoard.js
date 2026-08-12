@@ -17,7 +17,7 @@ const ButtonDeleteBoard = ({ boardId }) => {
       }
     } catch (error) {
       const errorMesage =
-        error.response?.data?.message ||
+        error.response?.data?.error ||
         error.message ||
         "Something went wrong.";
       toast.error(errorMesage);

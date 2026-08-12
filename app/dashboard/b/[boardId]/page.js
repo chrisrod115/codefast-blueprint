@@ -1,3 +1,4 @@
+import mongoose from "mongoose";
 import connectMongo from "@/libs/mongoose";
 import Board from "@/models/Board";
 import { auth } from "@/auth";
@@ -6,21 +7,24 @@ import Link from "next/link";
 import CardBoardLink from "@/components/CardBoardLink";
 import ButtonDeleteBoard from "@/components/ButtonDeleteBoard";
 const getBoard = async (boardId) => {
+  // Guard before querying: a malformed id makes Mongoose throw a CastError.
+  if (!mongoose.isValidObjectId(boardId)) {
+    return null;
+  }
   const session = await auth();
   await connectMongo();
-  const board = await Board.findOne({
+  return await Board.findOne({
     _id: boardId,
     userId: session?.user?.id,
   });
-  if (!board) {
-    redirect("/dashboard");
-  }
-  return board;
 };
 
 export default async function FeedbackBoard({ params }) {
   const { boardId } = params;
   const board = await getBoard(boardId);
+  if (!board) {
+    redirect("/dashboard");
+  }
   return (
     <main className="bg-base-200 min-h-screen">
       {/* HEADER */}
