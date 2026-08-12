@@ -12,7 +12,7 @@ const ButtonCheckout = () => {
     setIsLoading(true);
     try {
       const response = await axios.post("/api/billing/create-checkout", {
-        successUrl: window.location.origin + "/success",
+        successUrl: window.location.origin + "/dashboard/success",
         cancelUrl: window.location.href,
       });
 
